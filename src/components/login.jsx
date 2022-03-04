@@ -16,7 +16,7 @@ class Login extends Form {
 	};
 
 	doSubmit = () => {
-		console.log("submitted");
+		console.log("submitted", this.state.username);
 	};
 
 	render() {
@@ -25,7 +25,7 @@ class Login extends Form {
 				<h1>Login </h1>
 				<form onSubmit={this.handleSubmit}>
 					{this.renderInput("username", "Username")}
-					{this.renderInput("password", "Password",'password')}
+					{this.renderInput("password", "Password", "password")}
 
 					{this.renderButton("Login")}
 				</form>

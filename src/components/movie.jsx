@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies, deleteMovie } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/paginations";
 import ListGroup from "./common/listGroup";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 class Movie extends Component {
 	state = {
@@ -25,6 +26,8 @@ class Movie extends Component {
 	}
 
 	handleDelete = (movie) => {
+		const deletedMovie = deleteMovie(movie._id);
+		console.log(deletedMovie);
 		const movies = this.state.movies.filter((m) => m._id !== movie._id);
 		this.setState({ movies });
 	};
@@ -96,6 +99,10 @@ class Movie extends Component {
 				</div>
 
 				<div className="col">
+					<Link to="/movie/new">
+						<button className="btn btn-primary mb-3">New Movie</button>
+					</Link>
+
 					<p>Showing {totalCount} movies in the database</p>
 
 					<MoviesTable
@@ -117,5 +124,22 @@ class Movie extends Component {
 		);
 	}
 }
+
+// export const  updateMovie = (movie) => {
+// 	const movies = { ...this.state.movies };
+
+// 	let oldMovie = movies.find((m) => m._id === movie._id);
+// 	const newMovie = { ...movie };
+
+// 	const newGenre = getGenres.find((g) => g._id === newMovie.genreId);
+
+// 	const index = indexOf(oldMovie);
+// 	movies[index] = { ...movies[index] };
+// 	movies[index].title = newMovie.title;
+// 	movies[index].genre = newGenre;
+// 	movies[index].numberInStock = newMovie.numberInStock;
+// 	movies[index].dailyRentalRate = newMovie.dailyRentalRate;
+// 	console.log("updated");
+// };
 
 export default Movie;

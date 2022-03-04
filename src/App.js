@@ -12,6 +12,7 @@ import Register from "./components/register";
 
 import "./App.css";
 import "font-awesome/css/font-awesome.css";
+import NewMovie from "./components/newMovie";
 
 class App extends Component {
 	state = {};
@@ -23,6 +24,7 @@ class App extends Component {
 
 				<main className="container mt-5">
 					<Switch>
+						{/* <Route path="/movie/new" component={MovieForm}></Route> */}
 						<Route path="/register" component={Register} />
 						<Route path="/login" component={Login} />
 						<Route path="/movies" component={Movie} />

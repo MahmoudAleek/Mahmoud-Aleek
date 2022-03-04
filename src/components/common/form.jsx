@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import DropDownList from "./dropdownlist";
 
 class Form extends Component {
 	state = { data: {}, error: {} };
@@ -44,7 +45,7 @@ class Form extends Component {
 
 		const data = { ...this.state.data };
 		data[input.name] = input.value;
-
+		console.log(data);
 		this.setState({ data, errors });
 	};
 
@@ -54,7 +55,7 @@ class Form extends Component {
 		// Call the server
 		// const username = document.getElementById("username").value;
 		// const username = this.username.current.value;
-		// console.log("submitted : ", username);
+		//console.log("submitted : ", username);
 
 		const errors = this.validate();
 		this.setState({ errors: errors || {} });
@@ -68,6 +69,20 @@ class Form extends Component {
 			<button disabled={this.validate()} className="btn btn-primary">
 				{label}
 			</button>
+		);
+	}
+
+	renderDropDownList(options, label, name) {
+		const { data, errors } = this.state;
+		return (
+			<DropDownList
+				options={options}
+				label={label}
+				name={name}
+				value={data[name]}
+				onChange={this.handleChange}
+				error={errors[name]}
+			/>
 		);
 	}
 
